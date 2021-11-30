@@ -1,4 +1,4 @@
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace LiveCodingTask
 {
-    public class Tests
+    class UnitTest2
     {
         /* Write test to find all links on the page. Check that there is no links with spaces at the beginning. */
         /* <a> Some text</a>  - bad link */
@@ -27,15 +27,8 @@ namespace LiveCodingTask
             driver.Quit();
         }
         [Parallelizable(ParallelScope.Self)]
-        [Test, Description("Check for a link with space at the beginning")]
-        public void FindLink()
-        {
-            driver.Navigate().GoToUrl(linkToNavigate);
-            WebElement webElement = (WebElement)driver.FindElement(By.PartialLinkText(linkText));
-            string result = webElement.Text;
-            Assert.AreNotEqual(" ", result[0], "There is a link with space at the beginning.");
-        }
-        [Test, Description("Check for links with space(s) at the beginning"), Ignore("Duplicate test - not needed")]
+
+        [Test, Description("Check for links with space(s) at the beginning")]
         public void FindLinks()
         {
             int countOfSpacedLinks = 0;
@@ -48,6 +41,7 @@ namespace LiveCodingTask
                     countOfSpacedLinks++;
                 }
             }
+            driver.Quit();
             Assert.AreEqual(0, countOfSpacedLinks, "There are links with space(s) at the begining.");
         }
     }
